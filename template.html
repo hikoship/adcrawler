@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1><a href="http://www.1point3acres.com/bbs/">一亩三分地论坛</a>录取结果实时整理</h1>
+        <a href="http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&filter=author&orderby=dateline&sortid=164">去论坛查看</a>
+        <div class="nav">
+            <a href="/">全部</a>
+            <a href="/cs">CS</a>|
+            <a href="/mis">MIS</a>|
+            <a href="/ee">EE</a>|
+            <a href="/bme">BME</a>|
+            <a href="/me">ME</a>|
+            <a href="/ieor">IEOR</a>|
+            <a href="/stat">Stat/Biostat</a>|
+            <a href="/bioinfo">BioInfo</a>|
+            <a href="/mfe">MFE/Fin/FinMath</a>|
+            <a href="/econ">Econ/Biz</a>|
+            <a href="/math">Math/AppliedMath</a>|
+            <a href="/physics">Physics</a>|
+            <a href="/accounting">Accounting</a>|
+            <a href="/chem">Chem/CEng</a>|
+            <a href="/material">Material</a>|
+            <a href="/liberalarts">LiberalArts</a>|
+            <a href="/civileng">CivilEng</a>|
+            <a href="/envir">Envir</a>|
+            <a href="/bio">Bio</a>|
+            <a href="/earth">Earth</a>|
+            <a href="/edu">Edu</a>|
+            <a href="/other">Other</a>|
+            <a href="/cis">CIS</a>|
+            <a href="/ce">CE</a>|
+            <a href="/datascience">DataScience/Analytics</a>
+        </div>
+
+        <div class="notices">
+            <table border="1">
+                <tr>
+                    <th>入学</th>
+                    <th>时间</th>
+                    <th>项目</th>
+                    <th>结果</th>
+                    <th>三维</th>
+                    <th>本科</th>
+                    <th>标题</th>
+                </tr>
+
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.term }}</td>
+                    <td>发帖：<span{% if item.isNew %} style="color:red"{% end %}>{{ item.postDate }}</span><br>通知：{{ item.date }}</td>
+                    <td>{{ item.appSchool }}<br><b>{{ item.degree }}</b> - {{ item.major }}</td>
+                    <td bgcolor="{% if len(item.res) == 3 %}#ccc{% else %}#cfc{% end %}">{{ item.res }}</td>
+                    <td>{{ item.bsGpa }}<br>{{ item.toefl }}<br>{{ item.gre }}</td>
+                    <td>{{ item.bsSchool }}<br>{{ item.bsMajor }}</td>
+                    <td><a href="http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid={{ item.threadID }}">{{ item.title }}</a></td>
+                </tr>
+                {% end %}
+            </table>
+        </div>
+    </body>
+</html>
