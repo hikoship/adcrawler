@@ -1,64 +1,88 @@
 <html>
     <head>
-        <title>{{ title }}</title>
+        <!--<title>{{ title }}</title>-->
+        <title>一亩三分地论坛录取结果实时整理</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <script type="text/javascript" src="//ra.revolvermaps.com/0/0/7.js?i=07x64sbmlpf&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;sx=0" async="async"></script>
+
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
+        <script src="http://cdn.bootcss.com/jquery/2.2.0/jquery.min.js" charset="utf-8"></script>
     </head>
+
     <body>
-        <h1><a href="http://www.1point3acres.com/bbs/">一亩三分地论坛</a>录取结果实时整理</h1>
-        <a href="http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&filter=author&orderby=dateline&sortid=164">去论坛查看</a>
-        <div class="nav">
-            <a href="/">全部</a>
-            <a href="/cs">CS</a>|
-            <a href="/mis">MIS</a>|
-            <a href="/ee">EE</a>|
-            <a href="/bme">BME</a>|
-            <a href="/me">ME</a>|
-            <a href="/ieor">IEOR</a>|
-            <a href="/stat">Stat/Biostat</a>|
-            <a href="/bioinfo">BioInfo</a>|
-            <a href="/mfe">MFE/Fin/FinMath</a>|
-            <a href="/econ">Econ/Biz</a>|
-            <a href="/math">Math/AppliedMath</a>|
-            <a href="/physics">Physics</a>|
-            <a href="/accounting">Accounting</a>|
-            <a href="/chem">Chem/CEng</a>|
-            <a href="/material">Material</a>|
-            <a href="/liberalarts">LiberalArts</a>|
-            <a href="/civileng">CivilEng</a>|
-            <a href="/envir">Envir</a>|
-            <a href="/bio">Bio</a>|
-            <a href="/earth">Earth</a>|
-            <a href="/edu">Edu</a>|
-            <a href="/other">Other</a>|
-            <a href="/cis">CIS</a>|
-            <a href="/ce">CE</a>|
-            <a href="/datascience">DataScience/Analytics</a>
-        </div>
+        <div class="container">
+            <header>
+                <h1><a href="http://www.1point3acres.com/bbs/">一亩三分地论坛</a>录取结果实时整理</h1>
+                <a href="http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&filter=author&orderby=dateline&sortid=164">去论坛查看</a>
+            </header>
+            <nav>
+                <a href="/">全部</a>
+                <a href="/cs">CS</a>|
+                <a href="/mis">MIS</a>|
+                <a href="/ee">EE</a>|
+                <a href="/bme">BME</a>|
+                <a href="/me">ME</a>|
+                <a href="/ieor">IEOR</a>|
+                <a href="/stat">Stat/Biostat</a>|
+                <a href="/bioinfo">BioInfo</a>|
+                <a href="/mfe">MFE/Fin/FinMath</a>|
+                <a href="/econ">Econ/Biz</a>|
+                <a href="/math">Math/AppliedMath</a>|
+                <a href="/physics">Physics</a>|
+                <a href="/accounting">Accounting</a>|
+                <a href="/chem">Chem/CEng</a>|
+                <a href="/material">Material</a>|
+                <a href="/liberalarts">LiberalArts</a>|
+                <a href="/civileng">CivilEng</a>|
+                <a href="/envir">Envir</a>|
+                <a href="/bio">Bio</a>|
+                <a href="/earth">Earth</a>|
+                <a href="/edu">Edu</a>|
+                <a href="/other">Other</a>|
+                <a href="/cis">CIS</a>|
+                <a href="/ce">CE</a>|
+                <a href="/datascience">DataScience/Analytics</a>
+            </nav>
 
-        <div class="notices">
-            <table border="1">
-                <tr>
-                    <th>入学</th>
-                    <th>时间</th>
-                    <th>项目</th>
-                    <th>结果</th>
-                    <th>三维</th>
-                    <th>本科</th>
-                    <th>标题</th>
-                </tr>
+            <div class="table-responsive">
+                <table class="table-striped table-bordered">
+                    <tr class="something">
+                        <td class="col-md-2">A</td>
+                        <td class="col-md-3">B</td>
+                        <td class="col-md-6">C</td>
+                        <td class="col-md-1">D</td>
+                    </tr>
+                </table>
 
-                {% for item in items %}
-                <tr>
-                    <td>{{ item.term }}</td>
-                    <td>发帖：<span{% if item.isNew %} style="color:red"{% end %}>{{ item.postDate }}</span><br>通知：{{ item.date }}</td>
-                    <td>{{ item.appSchool }}<br><b>{{ item.degree }}</b> - {{ item.major }}</td>
-                    <td bgcolor="{% if len(item.res) == 3 %}#ccc{% else %}#cfc{% end %}">{{ item.res }}</td>
-                    <td>{{ item.bsGpa }}<br>{{ item.toefl }}<br>{{ item.gre }}</td>
-                    <td>{{ item.bsSchool }}<br>{{ item.bsMajor }}</td>
-                    <td><a href="http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid={{ item.threadID }}">{{ item.title }}</a></td>
-                </tr>
-                {% end %}
-            </table>
+                <table class="table-striped table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>入学</th>
+                            <th>时间</th>
+                            <th>项目&结果</th>
+                            <th>三维</th>
+                            <th>本科</th>
+                            <th>原帖链接</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.term }}</td>
+                            <td>发帖：<span{% if item.isNew %} style="color:red"{% end %}>{{ item.postDate }}</span><br>通知：{{ item.date }}</td>
+                            <td bgcolor="{% if len(item.res) == 3 %}#ccc{% else %}#cfc{% end %}">{{ item.appSchool }}<br><b>{{ item.degree }}</b> - {{ item.major }}<br>{{ item.res }}</td>
+                            <td>{{ item.bsGpa }}<br>{{ item.toefl }}<br>{{ item.gre }}</td>
+                            <td>{{ item.bsSchool }}<br>{{ item.bsMajor }}</td>
+                            <td><a href="http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid={{ item.threadID }}">{{ item.title }}</a></td>
+                        </tr>
+                        {% end %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </body>
 </html>
