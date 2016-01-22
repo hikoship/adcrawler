@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import tornado.ioloop
-import tornado.web
+import tornado.ioloop, tornado.web
 import urllib2, codecs
+import sys, logging
 from bs4 import BeautifulSoup
 from collections import namedtuple
-import logging
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -136,7 +135,7 @@ def make_app():
     ])
 
 if __name__ == "__main__":
-    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S', filename='post.log',level=logging.INFO)
+    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y, %a, %H:%M:%S', filename=sys.path[0] + '/log.log', level=logging.INFO)
     app = make_app()
     app.listen(8000)
     tornado.ioloop.IOLoop.current().start()
