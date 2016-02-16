@@ -16,6 +16,13 @@ class MainHandler(tornado.web.RequestHandler):
         #items = ["Item 1", "Item 2", "Item 3"]
         #self.render("template.html", title="My title", items=items)
 
+        try:
+            page = int(self.get_argument('page'))
+        except:
+            page = 1
+        if page < 0:
+            page = 1
+
         Notice = namedtuple('Notice', [
             'threadID',
             'term',
@@ -51,58 +58,72 @@ class MainHandler(tornado.web.RequestHandler):
 
         header = { 'Use-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6' }
 
-        url = "http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&filter=author&orderby=dateline&sortid=164"
-        req = urllib2.Request(url, headers = header)
-        content = urllib2.urlopen(req).read()
+        url = "http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&orderby=dateline&sortid=164&page=" + str(page)
+        try:
+            req = urllib2.Request(url, headers = header)
+            content = urllib2.urlopen(req).read()
 
-        soup = BeautifulSoup(content, 'html.parser')
-        for thread in soup.find_all('tbody'):
-            if thread['id'][0] != 'n':
-                # filter normal thread
-                continue
+            soup = BeautifulSoup(content, 'html.parser')
+        except:
+            self.write('Request Error.')
 
-            threadID = thread['id'].split('normalthread_')[1]
-            fonts = thread.find_all('font')
+        try:
+            for thread in soup.find_all('tbody'):
+                try:
+                    if thread['id'][0] != 'n':
+                        # filter normal thread
+                        continue
 
-            major = fonts[3].string
-            if self.majorFilter != '' and major != self.majorFilter:
-                continue
-            term = fonts[0].string[1:]
-            degree = fonts[1].string
-            res = fonts[2].b.string
-            appSchool = fonts[4].string
-            date = fonts[5].string
-            toefl = fonts[6].b.next_sibling.string[2:]
-            gre = fonts[7].b.next_sibling.string[2:]
-            bsMajor = fonts[8].string
-            if bsMajor is None:
-                bsMajor = ''
+                    threadID = thread['id'].split('normalthread_')[1]
+                    fonts = thread.find_all('font')
 
-            bsGpa = fonts[9].string[1:-1]
-            bsSchool = bsDict[fonts[10].string]
-            title = thread.find_all('a')[3].string
-            postDate = thread.select('em > span > span')[0].string
-            isNew = True if postDate[-1] == u'前' and postDate[-2] != u'天' else False
+                    major = fonts[3].string
+                    if self.majorFilter != '' and major != self.majorFilter:
+                        continue
 
-            notices.append(Notice(
-                int(threadID),
-                term,
-                degree,
-                res,
-                major,
-                appSchool,
-                date,
-                toefl,
-                gre,
-                bsMajor,
-                bsGpa,
-                bsSchool,
-                title,
-                postDate,
-                isNew
-            ))
+                    term = fonts[0].string[1:]
+                    degree = fonts[1].string
+                    res = fonts[2].b.string
+                    appSchool = fonts[4].string
+                    date = fonts[5].string
+                    toefl = fonts[6].b.next_sibling.string[2:]
+                    gre = fonts[7].b.next_sibling.string[2:]
+                    bsMajor = fonts[8].string
+                    if bsMajor is None:
+                        bsMajor = ''
 
-        self.render("template.html", title="My title", items=notices)
+                    bsGpa = fonts[9].string[1:-1]
+                    bsSchool = bsDict[fonts[10].string]
+                    title = thread.find_all('a')[3].string
+                    postDate = thread.select('em > span > span')[0].string
+                    isNew = True if postDate[-1] == u'前' and postDate[-2] != u'天' else False
+
+                    notices.append(Notice(
+                        int(threadID),
+                        term,
+                        degree,
+                        res,
+                        major,
+                        appSchool,
+                        date,
+                        toefl,
+                        gre,
+                        bsMajor,
+                        bsGpa,
+                        bsSchool,
+                        title,
+                        postDate,
+                        isNew
+                    ))
+                except:
+                    continue
+        except:
+            self.write('Cannot find threads from the table.')
+
+        try:
+            self.render("template.html", title="My title", items=[notices, page])
+        except:
+            self.write('Render Error.')
 
 
 def make_app():

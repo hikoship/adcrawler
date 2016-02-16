@@ -7,9 +7,22 @@
 
         <script type="text/javascript" src="//ra.revolvermaps.com/0/0/7.js?i=07x64sbmlpf&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;sx=0" async="async"></script>
 
-        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
-        <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
-        <script src="http://cdn.bootcss.com/jquery/2.2.0/jquery.min.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+        <style media="screen">
+            /*skeleton*/
+            div.container {
+                position: relative;
+                width: 100%;
+                margin: 0 auto;
+                padding: 0 20px;
+                box-sizing: border-box;
+            }
+
+            a {
+                color: #417096;
+                text-decoration: none;
+            }
+        </style>
     </head>
 
     <body>
@@ -17,64 +30,78 @@
             <header>
                 <h1><a href="http://www.1point3acres.com/bbs/">一亩三分地论坛</a>录取结果实时整理</h1>
                 <h3><a href="http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&filter=author&orderby=dateline&sortid=164">查看原网页</a></h3>
+                <nav>
+                    <a href="/">全部 </a>|
+                    <a href="/cs">CS </a>|
+                    <a href="/mis">MIS </a>|
+                    <a href="/ee">EE </a>|
+                    <a href="/bme">BME </a>|
+                    <a href="/me">ME </a>|
+                    <a href="/ieor">IEOR </a>|
+                    <a href="/stat">Stat/Biostat </a>|
+                    <a href="/bioinfo">BioInfo </a>|
+                    <a href="/mfe">MFE/Fin/FinMath </a>|
+                    <a href="/econ">Econ/Biz </a>|
+                    <a href="/math">Math/AppliedMath </a>|
+                    <a href="/physics">Physics </a>|
+                    <a href="/accounting">Accounting </a>|
+                    <a href="/chem">Chem/CEng </a>|
+                    <a href="/material">Material </a>|
+                    <a href="/liberalarts">LiberalArts </a>|
+                    <a href="/civileng">CivilEng </a>|
+                    <a href="/envir">Envir </a>|
+                    <a href="/bio">Bio </a>|
+                    <a href="/earth">Earth </a>|
+                    <a href="/edu">Edu </a>|
+                    <a href="/other">Other </a>|
+                    <a href="/cis">CIS </a>|
+                    <a href="/ce">CE </a>|
+                    <a href="/datascience">DataScience/Analytics</a>
+                    <br>
+                    以下是第 {{ items[1] }} 页的结果
+                    <br>
+                    {% if items[1] > 1 %}
+                    <a href="?page={{ items[1] - 1 }}">上一页</a>
+                    {% end %}
+                    <a href="?page={{ items[1] + 1 }}">下一页</a>
+                    <br>
+                    <form>
+                        查询第<input type="number" name="page" value="{{ items[1] }}" style="width: 50px">页
+                        <input type="submit" value="提交">
+                    </form>
+                </nav>
+
             </header>
 
-            <nav>
-                <a href="/">全部</a>
-                <a href="/cs">CS</a>|
-                <a href="/mis">MIS</a>|
-                <a href="/ee">EE</a>|
-                <a href="/bme">BME</a>|
-                <a href="/me">ME</a>|
-                <a href="/ieor">IEOR</a>|
-                <a href="/stat">Stat/Biostat</a>|
-                <a href="/bioinfo">BioInfo</a>|
-                <a href="/mfe">MFE/Fin/FinMath</a>|
-                <a href="/econ">Econ/Biz</a>|
-                <a href="/math">Math/AppliedMath</a>|
-                <a href="/physics">Physics</a>|
-                <a href="/accounting">Accounting</a>|
-                <a href="/chem">Chem/CEng</a>|
-                <a href="/material">Material</a>|
-                <a href="/liberalarts">LiberalArts</a>|
-                <a href="/civileng">CivilEng</a>|
-                <a href="/envir">Envir</a>|
-                <a href="/bio">Bio</a>|
-                <a href="/earth">Earth</a>|
-                <a href="/edu">Edu</a>|
-                <a href="/other">Other</a>|
-                <a href="/cis">CIS</a>|
-                <a href="/ce">CE</a>|
-                <a href="/datascience">DataScience/Analytics</a>
-            </nav>
+            <main>
+                <div>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>入学</th>
+                                <th>时间</th>
+                                <th>项目&结果</th>
+                                <th>三维</th>
+                                <th>本科</th>
+                                <th>原帖链接</th>
+                            </tr>
+                        </thead>
 
-            <div class="table-responsive">
-                <table class="table-striped table-bordered table-responsive">
-                    <thead>
-                        <tr>
-                            <th>入学</th>
-                            <th>时间</th>
-                            <th>项目&结果</th>
-                            <th>三维</th>
-                            <th>本科</th>
-                            <th>原帖链接</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for item in items %}
-                        <tr>
-                            <td>{{ item.term }}</td>
-                            <td>发帖：<span{% if item.isNew %} style="color:red"{% end %}>{{ item.postDate }}</span><br>通知：{{ item.date }}</td>
-                            <td bgcolor="{% if len(item.res) == 3 %}#ccc{% else %}#cfc{% end %}">{{ item.appSchool }}<br><b>{{ item.degree }}</b> - {{ item.major }}<br>{{ item.res }}</td>
-                            <td>{{ item.bsGpa }}<br>{{ item.toefl }}<br>{{ item.gre }}</td>
-                            <td>{{ item.bsSchool }}<br>{{ item.bsMajor }}</td>
-                            <td><a href="http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid={{ item.threadID }}">{{ item.title }}</a></td>
-                        </tr>
-                        {% end %}
-                    </tbody>
-                </table>
-            </div>
+                        <tbody>
+                            {% for notice in items[0] %}
+                            <tr>
+                                <td>{{ notice.term }}</td>
+                                <td>发帖：<span{% if notice.isNew %} style="color:red"{% end %}>{{ notice.postDate }}</span><br>通知：{{ notice.date }}</td>
+                                <td bgcolor="{% if len(notice.res) == 3 %}#ccc{% else %}#cfc{% end %}">{{ notice.appSchool }}<br><b>{{ notice.degree }}</b> - {{ notice.major }}<br>{{ notice.res }}</td>
+                                <td>{{ notice.bsGpa }}<br>{{ notice.toefl }}<br>{{ notice.gre }}</td>
+                                <td>{{ notice.bsSchool }}<br>{{ notice.bsMajor }}</td>
+                                <td><a href="http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid={{ notice.threadID }}">{{ notice.title }}</a></td>
+                            </tr>
+                            {% end %}
+                        </tbody>
+                    </table>
+                </div>
+            </main>
             <footer>
                 <h5><a href="https://github.com/hikoship/adcrawler">View Source</a></h5>
                 <div style="display:inline-block;width:400px;"><script type="text/javascript" src="//ra.revolvermaps.com/0/0/7.js?i=06sn4bwbxvv&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;sx=0" async="async"></script></div>
