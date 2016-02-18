@@ -1,6 +1,14 @@
 # 一亩三分地论坛录取结果实时整理
 
+Version 0.2 change log
+* 可按论坛页数检索
+* 改进异常处理
+* 舍弃 Bootstrap，手写 CSS
+
 Version 0.1
+* 初版
+
+---
 
 ### 使用
 
@@ -9,7 +17,7 @@ Version 0.1
 3. 访问 [localhost:8000](http://localhost:8000) 查看效果
 4. 选择自己关注的专业，将对应页面加入书签，下次访问可直接获取筛选后的信息。
 
-或直接[查看演示](http://vps.hgao.net:8000)，并存为书签。
+或直接[查看演示](http://hgao.net:8000)，并存为书签。
 
 ### 目的
 [一亩三分地论坛](http://www.1point3acres.com/bbs/)提供了一个让留学用户汇报录取结果的[页面](http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&filter=author&orderby=dateline&sortid=164)，但是不能自动根据专业分类，一些重点内容不够醒目，且对于移动端访问不够友好（Discuz! 在移动端不能看到发帖者的背景信息）
