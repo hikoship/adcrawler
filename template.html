@@ -95,7 +95,7 @@
                                 <td bgcolor="{% if len(notice.res) == 3 %}#ccc{% else %}#cfc{% end %}">{{ notice.appSchool }}<br><b>{{ notice.degree }}</b> - {{ notice.major }}<br>{{ notice.res }}</td>
                                 <td>{{ notice.bsGpa }}<br>{{ notice.toefl }}<br>{{ notice.gre }}</td>
                                 <td>{{ notice.bsSchool }}<br>{{ notice.bsMajor }}</td>
-                                <td><a href="http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid={{ notice.threadID }}">{{ notice.title }}</a></td>
+                                <td><a href="http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid={{ notice.threadID }}" target="_blank">{{ notice.title }}</a></td>
                             </tr>
                             {% end %}
                         </tbody>
