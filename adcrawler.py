@@ -157,7 +157,7 @@ def make_app():
     ])
 
 if __name__ == "__main__":
-    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S', filename='/home/gaohongyuan/Dropbox/VPS/server/adcrawler/adcrawler.log',level=logging.INFO)
+    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S', filename='/home/gaohongyuan/Dropbox/VPS/server/adcrawler/adcrawler.log',level=logging.WARNING)
     app = make_app()
     app.listen(8000)
     tornado.ioloop.IOLoop.current().start()
