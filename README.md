@@ -18,10 +18,10 @@ Version 0.1
 
 1. 安装 Python 2、[Tornado Web Server](http://www.tornadoweb.org/en/stable/) 和 [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/)。
 2. 运行 python adcrawler.py
-3. 访问 [localhost:8000](http://localhost:58000) 查看效果
+3. 访问 [localhost:58000](http://localhost:58000) 查看效果
 4. 选择自己关注的专业，将对应页面加入书签，下次访问可直接获取筛选后的信息。
 
-或直接[查看演示](http://ad.hgao.net)，并存为书签。
+<del>或直接[查看演示](http://ad.hgao.net)，并存为书签。</del>
 
 ### 目的
 [一亩三分地论坛](http://www.1point3acres.com/bbs/)提供了一个让留学用户汇报录取结果的[页面](http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=82&filter=author&orderby=dateline&sortid=164)，但是不能自动根据专业分类，一些重点内容不够醒目，且对于移动端访问不够友好（Discuz! 在移动端不能看到发帖者的背景信息）
